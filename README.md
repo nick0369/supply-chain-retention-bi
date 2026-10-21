@@ -4,6 +4,8 @@ An independent operational analytics project with validated Python ETL, incremen
 
 **180,519 order lines → 65,752 distinct orders · 28,965 completed orders · 5 reporting checks**
 
+**[Open the live dashboard](https://nick0369.github.io/supply-chain-retention-bi/)** · [Verified PostgreSQL CI run](https://github.com/nick0369/supply-chain-retention-bi/actions/runs/39630017470)
+
 ![FlowMetrics dashboard](dashboard/preview.png)
 
 ## Business problem
@@ -124,13 +126,13 @@ The dashboard calculates **late orders × assumed preventable share × assumed u
 
 Local result: **20 tests passed**, with the dedicated PostgreSQL test skipped locally when TEST_DATABASE_URL is absent. Lint passes. Tests cover invalid inputs, personal-field exclusion, order grain, repeated batches, corrected upserts, rollback, point-in-time features, censored labels, cohort maturity and an end-to-end replay.
 
-GitHub Actions runs the same tests with a PostgreSQL 16 service. Check the Actions tab for the actual remote result. TEST_DATABASE_URL must point to a disposable dedicated database; its integration test resets project tables there.
+GitHub Actions passed all **21 tests**, including the PostgreSQL 16 incremental refresh test, in the linked run. TEST_DATABASE_URL must point to a disposable dedicated database; its integration test resets project tables there.
 
 ## Power BI and automation
 
 [Power BI setup](bi/POWER_BI_SETUP.md) and [DAX measures](bi/measures.dax) describe the native report build. No `.pbix` is included. The browser dashboard is complete and runnable.
 
-[Runbook](docs/RUNBOOK.md) explains batch corrections, backfills, logging, scheduling and recovery. `scripts/run_daily.ps1` provides a local scheduler entry point; `automation/replay.yml` is a manual historical ETL replay template. No scheduler is installed automatically.
+[Runbook](docs/RUNBOOK.md) explains batch corrections, backfills, logging, scheduling and recovery. `scripts/run_daily.ps1` provides a local scheduler entry point. The **Replay historical ETL** workflow is enabled in GitHub Actions for manual runs and downloadable report artifacts; its template remains in `automation/replay.yml`. No local scheduler is installed automatically.
 
 ## Repository structure
 
