@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "supply-chain-retention-bi"
+version = "1.0.0"
+description = "Auditable operational analytics, customer inactivity cohorts and automated ETL"
+requires-python = ">=3.11"
+dependencies = ["pandas>=2.2,<4", "numpy>=1.26,<3", "SQLAlchemy>=2.0,<3", "psycopg[binary]>=3.2,<4"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
+
+[project.scripts]
+operations-bi = "operations.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 110

@@ -1,0 +1,52 @@
+{
+  "built_at_utc": "2026-10-21T15:50:33.371673+00:00",
+  "source_url": "https://zenodo.org/records/11112645/files/DataCoSupplyChainDataset.csv?download=1",
+  "source_sha256": "fa6d022ed437155e1a2f0378710602848703c8a7f203f7ff5d77805bf8480aa6",
+  "ingestion": {
+    "status": "already_loaded",
+    "source_rows": 180519,
+    "source_sha256": "fa6d022ed437155e1a2f0378710602848703c8a7f203f7ff5d77805bf8480aa6"
+  },
+  "line_count": 180519,
+  "orders": 65752,
+  "completed_orders": 28965,
+  "eligible_statuses": [
+    "COMPLETE",
+    "CLOSED"
+  ],
+  "observation_end": "2018-01-31",
+  "checks": [
+    {
+      "name": "order_primary_key",
+      "passed": true
+    },
+    {
+      "name": "line_count_reconciled",
+      "passed": true
+    },
+    {
+      "name": "net_sales_reconciled",
+      "passed": true
+    },
+    {
+      "name": "customer_snapshot_unique",
+      "passed": true
+    },
+    {
+      "name": "nonnegative_recency",
+      "passed": true
+    }
+  ],
+  "duration_seconds": 19.26,
+  "database_dialect": "sqlite",
+  "window": {
+    "as_of": "2017-01-31",
+    "observed_through": "2018-01-31",
+    "horizon_days": 90,
+    "label_mature": true
+  },
+  "quality_warnings": [
+    "No completed-purchase customer IDs overlap the final 90 days and earlier history. Verify identifier continuity and source coverage before treating recent inactivity as business churn."
+  ],
+  "final_90d_repeat_customer_overlap": 0
+}

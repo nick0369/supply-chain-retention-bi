@@ -1,0 +1,16 @@
+-- Import generated orders.csv and customer_snapshot.csv as separate fact tables.
+-- Keep customer_snapshot disconnected initially: it represents one historical cutoff.
+Completed Orders = CALCULATE(DISTINCTCOUNT(orders[order_id]), orders[completed] = 1)
+
+Late Completed Orders = CALCULATE(DISTINCTCOUNT(orders[order_id]), orders[completed] = 1, orders[late_flag] = 1)
+
+Late Rate = DIVIDE([Late Completed Orders], [Completed Orders])
+
+Net Sales Units = CALCULATE(SUM(orders[net_sales]), orders[completed] = 1)
+
+Recorded Profit Units = CALCULATE(SUM(orders[recorded_profit]), orders[completed] = 1)
+
+Snapshot Customers = DISTINCTCOUNT(customer_snapshot[customer_id])
+
+-- Use only a mature snapshot, with 0/1 labels, never a column of missing outcomes.
+Observed Future Inactivity Rate = AVERAGE(customer_snapshot[inactive_next_90d])
